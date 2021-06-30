@@ -1,6 +1,7 @@
 /* Copyright Contributors to the Open Cluster Management project */
 
 import {
+    AcmAlert,
     AcmAlertContext,
     AcmButton,
     AcmEmptyState,
@@ -11,12 +12,12 @@ import {
     AcmTable,
 } from '@open-cluster-management/ui-components'
 import { fitContent } from '@patternfly/react-table'
-import { PageSection } from '@patternfly/react-core'
+import { AlertVariant, PageSection } from '@patternfly/react-core'
 import { Fragment, useContext, useEffect, useMemo, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, useHistory } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { acmRouteState, clusterCuratorsState, secretsState } from '../../../atoms'
+import { acmRouteState, clusterCuratorsState, deploymentsState, secretsState } from '../../../atoms'
 import { BulkActionModel, IBulkActionModelProps } from '../../../components/BulkActionModel'
 import { DropdownActionModal, IDropdownActionModalProps } from '../../../components/DropdownActionModal'
 import { deleteResource } from '../../../lib/resource-request'
@@ -35,6 +36,9 @@ import { rbacDelete, rbacPatch } from '../../../lib/rbac-util'
 export default function AnsibleAutomationsPage() {
     const [, setRoute] = useRecoilState(acmRouteState)
     useEffect(() => setRoute(AcmRoute.Automation), [setRoute])
+    const [deployments] = useRecoilState(deploymentsState)
+    const towerInstalled =
+        deployments.filter((deployment) => deployment.metadata.name === 'tower-resource-operator').length > 0
 
     const alertContext = useContext(AcmAlertContext)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,6 +49,17 @@ export default function AnsibleAutomationsPage() {
         <AcmPage hasDrawer header={<AcmPageHeader title={t('cluster:template.title')} />}>
             <AcmPageContent id="clusters">
                 <PageSection>
+                    {!towerInstalled && (
+                        <AcmAlert
+                            style={{
+                                marginBottom: '16px',
+                            }}
+                            isInline
+                            variant={AlertVariant.danger}
+                            title="Ansible not installed"
+                            subtitle={t('ansible.operator.notInstalled')}
+                        ></AcmAlert>
+                    )}
                     <AnsibleJobTemplateTable />
                 </PageSection>
             </AcmPageContent>
