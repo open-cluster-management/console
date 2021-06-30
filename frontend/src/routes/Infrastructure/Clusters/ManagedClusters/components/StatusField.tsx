@@ -73,7 +73,7 @@ export function StatusField(props: { cluster: Cluster }) {
                 <AcmButton
                     style={{ padding: 0, fontSize: 'inherit' }}
                     key={props.cluster.name}
-                    onClick={() => window.open(latestJob.prehook?.status?.ansibleJobResult.url)}
+                    onClick={() => window.open(`https://${latestJob.prehook?.status?.ansibleJobResult.url}`)}
                     variant="link"
                     role="link"
                     icon={<ExternalLinkAltIcon />}
@@ -91,7 +91,7 @@ export function StatusField(props: { cluster: Cluster }) {
                 <AcmButton
                     style={{ padding: 0, fontSize: 'inherit' }}
                     key={props.cluster.name}
-                    onClick={() => window.open(latestJob.posthook?.status?.ansibleJobResult.url)}
+                    onClick={() => window.open(`https://${latestJob.posthook?.status?.ansibleJobResult.url}`)}
                     variant="link"
                     role="link"
                     icon={<ExternalLinkAltIcon />}
