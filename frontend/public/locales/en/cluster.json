@@ -600,6 +600,8 @@
     "template.modal.settings.label": "Extra variables",
     "template.modal.settings.placeholder": "Enter key=value pairs",
 
+    "ansible.operator.notInstalled":"Ansible Automaiton Platform Resource Operator not installed",
+
     "machinePool.alert.scaling.increase.title": "Scaling up in progress",
     "machinePool.alert.scaling.decrease.title": "Scaling down in progress",
     "machinePool.alert.scaling.increase.message": "Worker nodes are currently being added to this cluster. Click the <bold>View machines</bold> button to see the status of the scaling operations (it may take a few minutes for the changes to be reflected on this console).",

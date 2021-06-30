@@ -28,6 +28,7 @@ import { Namespace, NamespaceKind } from './resources/namespace'
 import { PolicyReport, PolicyReportKind } from './resources/policy-report'
 import { Secret, SecretKind } from './resources/secret'
 import { SubmarinerConfig, SubmarinerConfigKind } from './resources/submariner-config'
+import { Deployment, DeploymentKind } from './resources/deployments'
 
 export const acmRouteState = atom<AcmRoute>({ key: 'acmRoute', default: '' as AcmRoute })
 export const bareMetalAssetsState = atom<BareMetalAsset[]>({ key: 'bareMetalAssets', default: [] })
@@ -46,6 +47,7 @@ export const clusterManagementAddonsState = atom<ClusterManagementAddOn[]>({
     default: [],
 })
 export const configMapsState = atom<ConfigMap[]>({ key: 'configMaps', default: [] })
+export const deploymentsState = atom<Deployment[]>({ key: 'deployments', default: [] })
 export const discoveryConfigState = atom<DiscoveryConfig[]>({ key: 'discoveryConfigs', default: [] })
 export const discoveredClusterState = atom<DiscoveredCluster[]>({ key: 'discoveredClusters', default: [] })
 export const featureGatesState = atom<FeatureGate[]>({ key: 'featureGates', default: [] })
@@ -92,6 +94,7 @@ type ServerSideEventData = WatchEvent | SettingsEvent | { type: 'START' | 'LOADE
 
 export function LoadData(props: { children?: ReactNode }) {
     const [loading, setLoading] = useState(true)
+    const [, setAnsibleJobs] = useRecoilState(ansibleJobState)
     const [, setBareMetalAssets] = useRecoilState(bareMetalAssetsState)
     const [, setCertificateSigningRequests] = useRecoilState(certificateSigningRequestsState)
     const [, setClusterClaims] = useRecoilState(clusterClaimsState)
@@ -102,6 +105,7 @@ export function LoadData(props: { children?: ReactNode }) {
     const [, setClusterImageSets] = useRecoilState(clusterImageSetsState)
     const [, setClusterManagementAddons] = useRecoilState(clusterManagementAddonsState)
     const [, setConfigMaps] = useRecoilState(configMapsState)
+    const [, setDeployments] = useRecoilState(deploymentsState)
     const [, setDiscoveryConfigs] = useRecoilState(discoveryConfigState)
     const [, setDiscoveredClusters] = useRecoilState(discoveredClusterState)
     const [, setFeatureGates] = useRecoilState(featureGatesState)
@@ -117,7 +121,6 @@ export function LoadData(props: { children?: ReactNode }) {
     const [, setSecrets] = useRecoilState(secretsState)
     const [, setSettings] = useRecoilState(settingsState)
     const [, setSubmarinerConfigs] = useRecoilState(submarinerConfigsState)
-    const [, setAnsibleJobs] = useRecoilState(ansibleJobState)
 
     const setters: Record<string, SetterOrUpdater<any[]>> = {
         [AnsibleJobKind]: setAnsibleJobs,
@@ -131,6 +134,7 @@ export function LoadData(props: { children?: ReactNode }) {
         [ClusterProvisionKind]: setClusterProvisions,
         [ClusterManagementAddOnKind]: setClusterManagementAddons,
         [ConfigMapKind]: setConfigMaps,
+        [DeploymentKind]: setDeployments,
         [DiscoveryConfigKind]: setDiscoveryConfigs,
         [DiscoveredClusterKind]: setDiscoveredClusters,
         [FeatureGateKind]: setFeatureGates,
