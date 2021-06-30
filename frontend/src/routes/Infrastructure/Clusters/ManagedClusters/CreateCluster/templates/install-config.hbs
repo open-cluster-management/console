@@ -1,8 +1,8 @@
 
 apiVersion: v1
 metadata:
-  name: '{{{name}}}'
-baseDomain: {{{baseDomain}}}
+  name: '{{{name}}}' ##name
+baseDomain: {{{baseDomain}}} ##baseDomain
 
 
 {{! ========================================================== }}
@@ -176,16 +176,16 @@ networking:
   networkType: {{{../networkType}}} ##networkType
   clusterNetwork:
 {{#each ../networks}}
-  - cidr: {{{clusterNetwork}}} ##clusterNetwork
-    hostPrefix: {{{hostPrefix}}} ##hostPrefix
+  - cidr: {{{clusterNetwork}}} ##networks.{{@index}}.clusterNetwork
+    hostPrefix: {{{hostPrefix}}} ##networks.{{@index}}.hostPrefix
 {{/each}}
   machineNetwork:
 {{#each ../networks}}
-  - cidr: {{{machineCIDR}}} ##machineCIDR
+  - cidr: {{{machineCIDR}}} ##networks.{{@index}}.machineCIDR
 {{/each}}
   serviceNetwork:
 {{#each ../networks}}
-  - {{{serviceNetwork}}} ##serviceNetwork
+  - {{{serviceNetwork}}} ##networks.{{@index}}.serviceNetwork
 {{/each}}
 {{/if_ne}}
 

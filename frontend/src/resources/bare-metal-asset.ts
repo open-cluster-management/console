@@ -64,6 +64,31 @@ export interface ImportedBareMetalAsset {
     }
 }
 
+export enum BareMetalAssetConditionReasons {
+    SecretNotFound = 'SecretNotFound',
+    SecretFound = 'SecretFound',
+    NoneSpecified = 'NoneSpecified',
+    ClusterDeploymentNotFound = 'ClusterDeploymentNotFound',
+    ClusterDeploymentFound = 'ClusterDeploymentFound',
+    SyncSetCreationFailed = 'SyncSetCreationFailed',
+    SyncSetCreated = 'SyncSetCreated',
+    SyncSetGetFailed = 'SyncSetGetFailed',
+    SyncSetUpdateFailed = 'SyncSetUpdateFailed',
+    SyncSetUpdated = 'SyncSetUpdated',
+    SyncStatusNotFound = 'SyncStatusNotFound',
+    SyncSetNotApplied = 'SyncSetNotApplied',
+    SyncSetAppliedSuccessful = 'SyncSetAppliedSuccessful',
+    SyncSetAppliedFailed = 'SyncSetAppliedFailed',
+    UnexpectedResourceCount = 'UnexpectedResourceCount',
+}
+
+export enum BareMetalAssetConditionTypes {
+    ConditionCredentialsFound = 'CredentialsFound',
+    ConditionAssetSyncStarted = 'AssetSyncStarted',
+    ConditionClusterDeploymentFound = 'ClusterDeploymentFound',
+    ConditionAssetSyncCompleted = 'AssetSyncCompleted',
+}
+
 export function getBareMetalAsset(metadata: Object) {
     return getResource<BareMetalAsset>({
         kind: BareMetalAssetKind,

@@ -484,7 +484,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.awsCredentials.title'),
                 wizardTitle: t('credentialsForm.awsCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_AWS} target="_blank" rel="noreferrer">
                         {t('credentialsForm.awsCredentials.wizardDescription')}
                     </a>
                 ),
@@ -519,7 +519,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.gcpCredentials.title'),
                 wizardTitle: t('credentialsForm.gcpCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_GCP} target="_blank" rel="noreferrer">
                         {t('credentialsForm.gcpCredentials.wizardDescription')}
                     </a>
                 ),
@@ -556,7 +556,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.azureCredentials.title'),
                 wizardTitle: t('credentialsForm.azureCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_AZURE} target="_blank" rel="noreferrer">
                         {t('credentialsForm.azureCredentials.wizardDescription')}
                     </a>
                 ),
@@ -624,7 +624,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.vCenter.title'),
                 wizardTitle: t('credentialsForm.vCenter.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_VMWARE} target="_blank" rel="noreferrer">
                         {t('credentialsForm.vCenter.wizardDescription')}
                     </a>
                 ),
@@ -715,7 +715,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.openStackCredentials.title'),
                 wizardTitle: t('credentialsForm.openStackCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_OPENSTACK} target="_blank" rel="noreferrer">
                         {t('credentialsForm.openStackCredentials.wizardDescription')}
                     </a>
                 ),
@@ -751,7 +751,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.bareMetalCredentials.title'),
                 wizardTitle: t('credentialsForm.bareMetalCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_BAREMETAL} target="_blank" rel="noreferrer">
                         {t('credentialsForm.bareMetalCredentials.wizardDescription')}
                     </a>
                 ),
@@ -786,7 +786,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.bareMetalDisconnected.title'),
                 wizardTitle: t('credentialsForm.bareMetalDisconnected.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_BAREMETAL} target="_blank" rel="noreferrer">
                         {t('credentialsForm.bareMetalDisconnected.wizardDescription')}
                     </a>
                 ),
@@ -841,7 +841,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.ansibleCredentials.title'),
                 wizardTitle: t('credentialsForm.ansibleCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS._ANSIBLE} target="_blank" rel="noreferrer">
                         {t('credentialsForm.ansibleCredentials.wizardDescription')}
                     </a>
                 ),
@@ -876,7 +876,7 @@ export function CredentialsForm(props: {
                 title: t('credentialsForm.openshiftCredentials.title'),
                 wizardTitle: t('credentialsForm.openshiftCredentials.wizardTitle'),
                 description: (
-                    <a href={DOC_LINKS.CREATE_CONNECTION} target="_blank" rel="noreferrer">
+                    <a href={DOC_LINKS.CREATE_CONNECTION_REDHATCLOUD} target="_blank" rel="noreferrer">
                         {t('credentialsForm.openshiftCredentials.wizardDescription')}
                     </a>
                 ),

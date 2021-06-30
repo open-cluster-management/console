@@ -23,8 +23,15 @@ spec:
   baseDomain: {{{baseDomain}}}  ##baseDomain
   installConfigSecretTemplateRef:
     name: {{{name}}}-install-config
+{{#if releaseImageReference}}
   imageSetRef:
+     #{{{clusterImageSetComment}}}
     name: {{{releaseImageReference}}}
+{{/if}}
+{{#if clusterReleaseImage}}
+  imageSetRef:
+    name: {{{clusterImageSetName}}}
+{{/if}}
   pullSecretRef:
     name: {{{name}}}-pull-secret
   platform:
@@ -58,6 +65,7 @@ spec:
 {{! ==================ClusterImageSet========================= }}
 {{! ========================================================== }}
 {{! ========================================================== }}
+
 
 {{#if clusterReleaseImage}}
 ---

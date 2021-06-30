@@ -314,14 +314,26 @@ function canListClusterScopedKind(resource: IResource, token: string): Promise<b
 
 function canListNamespacedScopedKind(resource: IResource, token: string): Promise<boolean> {
     if (!resource.metadata?.namespace) return Promise.resolve(false)
-    return canAccess({ kind: resource.kind, apiVersion: resource.apiVersion }, 'list', token)
+    return canAccess(
+        {
+            kind: resource.kind,
+            apiVersion: resource.apiVersion,
+            metadata: { namespace: resource.metadata.namespace },
+        },
+        'list',
+        token
+    )
 }
 
 function canGetResource(resource: IResource, token: string): Promise<boolean> {
     return canAccess(resource, 'get', token)
 }
 
-function canAccess(resource: IResource, verb: 'get' | 'list', token: string): Promise<boolean> {
+function canAccess(
+    resource: { kind: string; apiVersion: string; metadata?: { name?: string; namespace?: string } },
+    verb: 'get' | 'list',
+    token: string
+): Promise<boolean> {
     // TODO make sure old cache items get cleaned up
 
     const key = `${resource.kind}:${resource.metadata?.namespace}:${resource.metadata?.name}`

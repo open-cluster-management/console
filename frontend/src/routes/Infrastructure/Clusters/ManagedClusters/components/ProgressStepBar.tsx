@@ -30,7 +30,7 @@ export function ProgressStepBar() {
         ClusterStatus.posthookfailed,
     ]
 
-    if (installStatus.includes(cluster?.status!)) {
+    if (installStatus.includes(cluster?.status!) && curator?.spec?.desiredCuration === 'install') {
         // hook state
         const prehooks = curator?.spec?.install?.prehook?.length
         const posthooks = curator?.spec?.install?.posthook?.length

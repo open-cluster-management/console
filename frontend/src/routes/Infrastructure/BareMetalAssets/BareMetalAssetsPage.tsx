@@ -26,6 +26,8 @@ import { deleteResource, IRequestResult } from '../../../lib/resource-request'
 import { NavigationPath } from '../../../NavigationPath'
 import {
     BareMetalAsset,
+    BareMetalAssetConditionReasons,
+    BareMetalAssetConditionTypes,
     createBareMetalAssetNamespaces,
     importBareMetalAsset,
     ImportedBareMetalAsset,
@@ -270,6 +272,7 @@ export function BareMetalAssetsTable(props: {
                                     bareMetalAsset.status!.conditions[0].lastTransitionTime
                                 )
                                 let mostCurrentStatus = bareMetalAsset.status!.conditions[0].type
+                                let mostCurrentReason = bareMetalAsset.status.conditions[0].reason
                                 for (const conditions of bareMetalAsset.status!.conditions) {
                                     if (
                                         new Date(conditions.lastTransitionTime).getTime() >
@@ -277,6 +280,7 @@ export function BareMetalAssetsTable(props: {
                                     ) {
                                         mostCurrentStatusTime = new Date(conditions.lastTransitionTime)
                                         mostCurrentStatus = conditions.type
+                                        mostCurrentReason = conditions.reason
                                     }
                                     // if status time is equivalent, take the status at that was added last
                                     else if (
@@ -285,23 +289,16 @@ export function BareMetalAssetsTable(props: {
                                     ) {
                                         mostCurrentStatusTime = new Date(conditions.lastTransitionTime)
                                         mostCurrentStatus = conditions.type
+                                        mostCurrentReason = conditions.reason
                                     }
                                 }
-                                switch (mostCurrentStatus) {
-                                    // returns translation strings
-                                    case 'CredentialsFound':
-                                        return t('bareMetalAsset.statusMessage.credentialsFound')
-                                    case 'AssetSyncStarted':
-                                        return t('bareMetalAsset.statusMessage.assetSyncStarted')
-                                    case 'ClusterDeploymentFound':
-                                        return t('bareMetalAsset.statusMessage.clusterDeploymentFound')
-                                    case 'AssetSyncCompleted':
-                                        return t('bareMetalAsset.statusMessage.assetSyncCompleted')
-                                    case 'Ready':
-                                        return t('bareMetalAsset.statusMessage.ready')
-                                    default:
-                                        return ''
-                                }
+
+                                if (
+                                    mostCurrentReason === BareMetalAssetConditionReasons.NoneSpecified &&
+                                    mostCurrentStatus === BareMetalAssetConditionTypes.ConditionClusterDeploymentFound
+                                )
+                                    return t('bareMetalAsset.statusMessage.clusterDeploymentNameNotFound')
+                                else return t(`bareMetalAsset.statusMessage.${mostCurrentReason}`)
                             }
                             return ''
                         },

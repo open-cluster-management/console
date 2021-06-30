@@ -34,7 +34,7 @@ import { BatchChannelSelectModal } from '../../components/BatchChannelSelectModa
 import { ProgressStepBar } from '../../components/ProgressStepBar'
 
 export function ClusterOverviewPageContent(props: { canGetSecret?: boolean }) {
-    const { cluster } = useContext(ClusterContext)
+    const { cluster, clusterCurator } = useContext(ClusterContext)
     const { t } = useTranslation(['cluster', 'common'])
     const [showEditLabels, setShowEditLabels] = useState<boolean>(false)
     const [showChannelSelectModal, setShowChannelSelectModal] = useState<boolean>(false)
@@ -84,7 +84,9 @@ export function ClusterOverviewPageContent(props: { canGetSecret?: boolean }) {
         },
         {
             key: t('table.distribution'),
-            value: cluster?.distribution?.displayVersion && <DistributionField cluster={cluster} />,
+            value: cluster?.distribution?.displayVersion && (
+                <DistributionField cluster={cluster} clusterCurator={clusterCurator} />
+            ),
         },
         {
             filterKey: 'channel',

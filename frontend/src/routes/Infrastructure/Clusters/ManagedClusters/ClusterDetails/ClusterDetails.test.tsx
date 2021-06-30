@@ -55,8 +55,10 @@ import {
     acmRouteState,
     clusterProvisionsState,
     machinePoolsState,
+    clusterCuratorsState,
 } from '../../../../../atoms'
 import { mockOpenShiftConsoleConfigMap, mockManagedClusterSet } from '../../../../../lib/test-metadata'
+import { ClusterCurator, ClusterCuratorApiVersion, ClusterCuratorKind } from '../../../../../resources/cluster-curator'
 
 export const clusterName = 'test-cluster'
 
@@ -704,6 +706,22 @@ export const mockMachinePoolAuto: MachinePool = {
     },
 }
 
+const mockClusterCurator: ClusterCurator = {
+    apiVersion: ClusterCuratorApiVersion,
+    kind: ClusterCuratorKind,
+    metadata: {
+        name: 'test-cluster',
+        namespace: 'test-cluster',
+    },
+    spec: {
+        desiredCuration: 'install',
+        install: {
+            towerAuthSecret: 'ansible-credential-i',
+            prehook: [],
+        },
+    },
+}
+
 const nockListHiveProvisionJobs = () =>
     nockNamespacedList(
         { apiVersion: PodApiVersion, kind: PodKind, metadata: { namespace: clusterName } },
@@ -725,6 +743,7 @@ const Component = () => (
             snapshot.set(configMapsState, [mockOpenShiftConsoleConfigMap])
             snapshot.set(clusterProvisionsState, [mockClusterProvisions])
             snapshot.set(machinePoolsState, [mockMachinePoolManual, mockMachinePoolAuto])
+            snapshot.set(clusterCuratorsState, [mockClusterCurator])
         }}
     >
         <MemoryRouter initialEntries={[NavigationPath.clusterDetails.replace(':id', clusterName)]}>

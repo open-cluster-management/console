@@ -244,6 +244,6 @@ describe('bare metal asset page', () => {
         )
         await waitForNock(clusterNock)
         await waitForText(mockBareMetalAssets[0].metadata.name!)
-        await waitForText('bareMetalAsset.statusMessage.assetSyncStarted')
+        await waitForText('bareMetalAsset.statusMessage.SyncSetUpdated')
     })
 })

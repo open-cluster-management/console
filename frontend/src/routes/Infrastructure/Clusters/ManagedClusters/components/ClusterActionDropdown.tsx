@@ -276,7 +276,7 @@ export function ClusterActionDropdown(props: { cluster: Cluster; isKebab: boolea
             'import-cluster',
             'hibernate-cluster',
             'resume-cluster',
-            'destroy-cluster',
+            'detach-cluster',
         ]
         actions = actions.filter((a) => !disabledPreHookActions.includes(a.id))
     }
