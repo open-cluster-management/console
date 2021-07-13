@@ -1,7 +1,5 @@
 /* Copyright Contributors to the Open Cluster Management project */
 
-import fs from 'fs'
-import path from 'path'
 import Handlebars from 'handlebars'
 import installConfigHbs from '../../../ManagedClusters/CreateCluster/templates/install-config.hbs'
 import { keyBy, cloneDeep } from 'lodash'
@@ -11,15 +9,7 @@ import controlDataGCP from '../../../ManagedClusters/CreateCluster/controlData/C
 import controlDataAZR from '../../../ManagedClusters/CreateCluster/controlData/ControlDataAZR'
 import { RedHatLogo, AwsLogo, GoogleLogo, AzureLogo } from '../../../ManagedClusters/CreateCluster/controlData/Logos'
 
-const installConfig =
-    typeof installConfigHbs !== 'string'
-        ? installConfigHbs
-        : Handlebars.compile(
-              fs.readFileSync(
-                  path.resolve(__dirname, '../../../ManagedClusters/CreateCluster/templates/install-config.hbs'),
-                  'utf8'
-              )
-          )
+const installConfig = Handlebars.compile(installConfigHbs)
 
 export const getActiveCardID = (control, fetchData = {}) => {
     const { requestedUIDs } = fetchData

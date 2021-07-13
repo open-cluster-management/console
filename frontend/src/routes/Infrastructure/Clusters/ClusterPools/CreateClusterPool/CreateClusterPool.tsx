@@ -14,8 +14,6 @@ import { createCluster } from '../../../../../lib/create-cluster'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 import { NavigationPath } from '../../../../../NavigationPath'
-import fs from 'fs'
-import path from 'path'
 import Handlebars from 'handlebars'
 import { DOC_LINKS } from '../../../../../lib/doc-util'
 import { namespacesState } from '../../../../../atoms'
@@ -35,29 +33,7 @@ import { FeatureGates } from '../../../../../FeatureGates'
 // include monaco editor
 import MonacoEditor from 'react-monaco-editor'
 import 'monaco-editor/esm/vs/editor/editor.all.js'
-import 'monaco-editor/esm/vs/editor/standalone/browser/quickOpen/quickCommand.js'
 import 'monaco-editor/esm/vs/basic-languages/yaml/yaml.contribution.js'
-import { global_BackgroundColor_dark_100 as editorBackground } from '@patternfly/react-tokens'
-declare const window: any
-if (window.monaco) {
-    window.monaco.editor.defineTheme('console', {
-        base: 'vs-dark',
-        inherit: true,
-        rules: [
-            // avoid pf tokens for `rules` since tokens are opaque strings that might not be hex values
-            { token: 'number', foreground: 'ace12e' },
-            { token: 'type', foreground: '73bcf7' },
-            { token: 'string', foreground: 'f0ab00' },
-            { token: 'keyword', foreground: 'cbc0ff' },
-        ],
-        colors: {
-            'editor.background': editorBackground?.value,
-            'editorGutter.background': '#292e34', // no pf token defined
-            'editorLineNumber.activeForeground': '#fff',
-            'editorLineNumber.foreground': '#f0f0f0',
-        },
-    })
-}
 interface CreationStatus {
     status: string
     messages: any[] | null
@@ -169,11 +145,8 @@ export function CreateClusterPool() {
         return t(key, arg)
     }
 
-    let template = hiveTemplate
-    // react-scripts HATE jest transforms so we got to load the templates ourselves
-    if (typeof hiveTemplate === 'string') {
-        template = Handlebars.compile(fs.readFileSync(path.resolve(__dirname, './templates/hive-template.hbs'), 'utf8'))
-    }
+    //compile template
+    const template = Handlebars.compile(hiveTemplate)
 
     // if openned from bma page, pass selected bma's to editor
     const urlParams = new URLSearchParams(location.search.substring(1))

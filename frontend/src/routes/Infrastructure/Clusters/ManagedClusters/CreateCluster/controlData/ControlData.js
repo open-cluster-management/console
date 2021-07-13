@@ -1,7 +1,5 @@
 /* Copyright Contributors to the Open Cluster Management project */
 
-import fs from 'fs'
-import path from 'path'
 import Handlebars from 'handlebars'
 import installConfigHbs from '../templates/install-config.hbs'
 
@@ -13,10 +11,7 @@ import controlDataBMC from './ControlDataBMC'
 import controlDataOST from './ControlDataOST'
 import { RedHatLogo, AwsLogo, GoogleLogo, AzureLogo, VMwareLogo, BaremetalLogo } from './Logos'
 
-const installConfig =
-    typeof installConfigHbs !== 'string'
-        ? installConfigHbs
-        : Handlebars.compile(fs.readFileSync(path.resolve(__dirname, '../templates/install-config.hbs'), 'utf8'))
+const installConfig = Handlebars.compile(installConfigHbs)
 
 export const getActiveCardID = (control, fetchData = {}) => {
     const { requestedUIDs } = fetchData
