@@ -10,7 +10,7 @@ const { HTTP2_HEADER_AUTHORIZATION } = constants
 const agent = new Agent({ rejectUnauthorized: false })
 
 export async function authenticated(req: Http2ServerRequest, res: Http2ServerResponse): Promise<void> {
-    const token = parseCookies(req)['acm-access-token-cookie']
+    const token = parseCookies(req)['openshift-session-token']
     if (!token) return unauthorized(req, res)
     try {
         const response = await fetchRetry(process.env.CLUSTER_API_URL + '/apis', {

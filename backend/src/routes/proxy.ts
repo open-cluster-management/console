@@ -23,7 +23,7 @@ const proxyResponseHeaders = [
 ]
 
 export function proxy(req: Http2ServerRequest, res: Http2ServerResponse): void {
-    const token = parseCookies(req)['acm-access-token-cookie']
+    const token = parseCookies(req)['openshift-session-token']
     if (!token) return unauthorized(req, res)
 
     const url = req.url

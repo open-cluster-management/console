@@ -14,7 +14,7 @@ import { IResource } from '../resources/resource'
 import { serviceAcccountToken, setDead } from './liveness'
 
 export function events(req: Http2ServerRequest, res: Http2ServerResponse): void {
-    const token = parseCookies(req)['acm-access-token-cookie']
+    const token = parseCookies(req)['openshift-session-token']
     if (!token) return unauthorized(req, res)
     ServerSideEvents.handleRequest(token, req, res)
 }

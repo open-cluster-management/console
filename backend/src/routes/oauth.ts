@@ -53,7 +53,7 @@ export async function loginCallback(req: Http2ServerRequest, res: Http2ServerRes
         const body = await jsonRequest<{ access_token: string }>(oauthInfo.token_endpoint + '?' + requestQueryString)
         if (body.access_token) {
             const headers = {
-                'Set-Cookie': `acm-access-token-cookie=${body.access_token}; ${
+                'Set-Cookie': `openshift-session-token=${body.access_token}; ${
                     process.env.NODE_ENV === 'production' ? 'Secure; ' : ''
                 } HttpOnly; Path=/`,
                 location: process.env.FRONTEND_URL,
@@ -68,7 +68,7 @@ export async function loginCallback(req: Http2ServerRequest, res: Http2ServerRes
 }
 
 export function logout(req: Http2ServerRequest, res: Http2ServerResponse): void {
-    const token = parseCookies(req)['acm-access-token-cookie']
+    const token = parseCookies(req)['openshift-session-token']
     if (!token) return unauthorized(req, res)
 
     let tokenName = token
@@ -90,7 +90,7 @@ export function logout(req: Http2ServerRequest, res: Http2ServerResponse): void 
             agent: new Agent({ rejectUnauthorized: false }),
         },
         (response: IncomingMessage) => {
-            deleteCookie(res, 'acm-access-token-cookie')
+            deleteCookie(res, 'openshift-session-token')
             res.writeHead(response.statusCode).end()
         }
     )

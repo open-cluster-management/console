@@ -8,7 +8,7 @@ import { logger } from '../lib/logger'
 import { notFound, unauthorized } from '../lib/respond'
 
 export function search(req: Http2ServerRequest, res: Http2ServerResponse): void {
-    const token = parseCookies(req)['acm-access-token-cookie']
+    const token = parseCookies(req)['openshift-session-token']
     if (!token) return unauthorized(req, res)
 
     const searchUrl = process.env.SEARCH_API_URL || 'https://search-search-api:4010'

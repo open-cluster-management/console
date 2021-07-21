@@ -73,7 +73,7 @@ Go to the [Contributing guide](CONTRIBUTING.md) to learn how to get involved.
 ### Proxy Routes
 
 The backend proxies api calls to the kubernetes cluster api.
-Proxy calls will use the clients api token stored in `acm-access-token-cookie` cookie.
+Proxy calls will use the clients api token stored in `openshift-session-token` cookie.
 This enforces user RBAC for proxy calls.
 
 ### Watch Route
@@ -96,14 +96,14 @@ To develop with self signed certificates goto `chrome://flags/`and enable
 
 ### Authentication
 
-Frontend has a cookie `acm-access-token-cookie` that contains the user's token.
+Frontend has a cookie `openshift-session-token` that contains the user's token.
 
 If the backend responds with a `401 Unauthorized` the frontend starts an OAuth flow to authorize with the cluster.
 
 1. Frontend redirects to the backend `/login` endpoint.
 2. Backend redirects to the cluster `/authorize` endpoint.
 3. Cluster OAuth redirects back to the backend `/login/callback` endpoint.
-4. Backend redirects to the frontend and sets the `acm-access-token-cookie`.
+4. Backend redirects to the frontend and sets the `openshift-session-token`.
 
 ## Optional Features
 
